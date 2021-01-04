@@ -163,7 +163,7 @@
 
  $(document).ready(function() {
   $('#header').daisyjs({
-    dotColor: '#000',
+    dotColor: '#000000',
     lineColor: '#18d26e30',
     density: 30000,
     particleRadius: 10,
