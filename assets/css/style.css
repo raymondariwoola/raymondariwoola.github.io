@@ -366,7 +366,7 @@ section .container {
   margin: 4px 10px;
 }
 
-.section-title p {
+.section-title p, .linked2linkedin {
   margin: 0;
   margin: -15px 0 15px 0;
   font-size: 36px;
@@ -374,6 +374,11 @@ section .container {
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
   color: #fff;
+}
+
+.linked2linkedin {
+  text-align: center;
+  padding: 50px 0px 5px 0px;
 }
 
 /*--------------------------------------------------------------
