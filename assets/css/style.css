@@ -90,19 +90,20 @@ canvas.pg-canvas {
 }
 
 #downloadPDFresume {
-  text-align: center;
+  text-align: center !important;
 }
 
 #downloadPDFresume:hover {
-  text-decoration: overline;
-  text-decoration-style: dashed;
-  text-shadow: 2px 2px 45px #18d26e;
+  text-decoration: overline !important;
+  text-decoration-style: dashed !important;
+  text-shadow: 2px 2px 45px #18d26e !important;
 }
 
 span.bx.bxs-file-pdf {
-  color: aliceblue;
-  background-color: red;
+  color: aliceblue !important;
+  background-color: red !important;
 }
+
 
 
 /*--------------------------------------------------------------
