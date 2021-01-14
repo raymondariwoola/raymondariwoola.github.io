@@ -7,6 +7,7 @@ body {
   color: #fff;
   position: relative;
   background: transparent;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -41,6 +42,75 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
 
+.mksmall {
+  font-size: small;
+}
+
+.header4Tag:hover {
+  color: #35e888;
+  text-decoration: none;
+}
+
+.header4Tag {
+  color: #18d26e;
+}
+
+.bxcIcon {
+  text-align: center;
+  background: #18d26e36;
+  transition: 2s;
+}
+
+.bxcIcon:hover {
+  background: black;
+  transition: 1s;
+}
+
+.head2span {
+  display: inline-block;
+  padding-right: 1%;
+}
+
+canvas.pg-canvas {
+  position: absolute;
+  /* visibility: hidden; */
+}
+
+.mpad {
+  padding-bottom: 40px;
+}
+
+.carousel-indicators li {
+  background-color: #000 !important;
+}
+
+.carousel-control-next:hover, .carousel-control-prev:hover {
+  color: #000;
+  background: black;
+}
+
+
+/*--------------------------------------------------------------
+# Custom Scrollbar
+--------------------------------------------------------------*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: repeating-linear-gradient(#18d26efa, #24dc80, #000000 10px);
+  border-radius: 100%;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: repeating-linear-gradient(#18d26efa, #24dc80, #000000 5px);
+}
+
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -51,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   z-index: 997;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 #header * {
@@ -366,7 +436,7 @@ section .container {
   margin: 4px 10px;
 }
 
-.section-title p {
+.section-title p, linked2linkedin {
   margin: 0;
   margin: -15px 0 15px 0;
   font-size: 36px;
@@ -379,13 +449,8 @@ section .container {
 .linked2linkedin {
   text-align: center;
   padding: 50px 0px 5px 0px;
-  margin: 0;
-  margin: -15px 0 15px 0;
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
-  color: #fff;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 /*--------------------------------------------------------------
@@ -663,6 +728,13 @@ section .container {
 
 .services .icon-box:hover h4 a, .services .icon-box:hover p {
   color: #fff;
+}
+
+.services .icon-box ul {
+  line-height: 28px;
+  font-size: 14px;
+  margin-bottom: 0;
+  text-align: left;
 }
 
 /*--------------------------------------------------------------
