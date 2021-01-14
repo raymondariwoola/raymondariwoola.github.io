@@ -89,11 +89,11 @@ canvas.pg-canvas {
   background: black;
 }
 
-#downloadPDFresume {
+h1#downloadPDFresume {
   text-align: center !important;
 }
 
-#downloadPDFresume:hover {
+h1#downloadPDFresume:hover {
   text-decoration: overline !important;
   text-decoration-style: dashed !important;
   text-shadow: 2px 2px 45px #18d26e !important;
