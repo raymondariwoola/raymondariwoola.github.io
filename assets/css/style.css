@@ -991,3 +991,14 @@ section .container {
 .cp_embed_wrapper {
   margin-bottom: 5%;
 }
+
+.bxl-codepen {
+  font-size: 10rem;
+  transition-duration: 2s;
+}
+
+.bxl-codepen:hover {
+  font-size: 10.5rem;
+  color:#18d26e;
+  transition-duration: 2s;
+}
