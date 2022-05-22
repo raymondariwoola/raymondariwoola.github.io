@@ -1,1 +1,72 @@
-Test
+<div class="player">
+	<div class="img-box">
+		<img src="https://images.pexels.com/photos/2350325/pexels-photo-2350325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Singer" title="Singer">
+	</div>
+	
+	<audio controls>
+		<source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/355309/Swing_Jazz_Drum.mp3" type="audio/mp3">
+	</audio>
+</div>
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: 0;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+	align-items: center;
+	background-image: linear-gradient(
+											45deg,
+											#770060,
+											#560dac
+										);
+	display: flex;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+.player {
+	background-color: #f1f3f4;
+	box-shadow: 0 50px 80px rgba(0, 0, 0, 0.25);
+	position: relative;
+	width: 350px;
+}
+
+.player .img-box {
+	height: 350px;
+	position: relative;
+	width: 100%;
+}
+
+.player .img-box img {
+	height: 100%;
+	left: 0;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.player audio {
+	outline: none;
+	width: 100%;
+}
+
+
+//////////////////////////////////////
+
+
+
+
+
+
