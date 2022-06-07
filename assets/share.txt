@@ -1,1 +1,145 @@
 
+<nav>
+  <input type="checkbox" id="toggle">
+  <label for="toggle" id="menu-toggle"></label>
+  <ul>
+    <label for="toggle" id="menu-close">
+      <i class="fa fa-times"></i>
+    </label>
+    <li class="active">Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+</nav>
+<div class="container">
+  
+</div>
+
+
+
++++++++++++++++++++++++++++++++++
+$primary-color: #A9EEE6;
+$secondary-color: #F38181;
+$background-color: #FEFAEC;
+$text-color: #625772;
+
+$font: "Ubuntu", sans-serif;
+
+* {
+  font-family: $font;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  background-color: $background-color;
+}
+
+nav {
+  position: absolute;
+  right: 4em;
+  top: 4em;
+  color: $text-color;
+  border: 2px solid $primary-color;
+  box-shadow: 0 6px 15px rgba(36,37,38,0.08);
+  
+  input#toggle {
+    display: none;
+  }
+  
+  label[for="toggle"] {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  
+  #menu-toggle {   
+    position: absolute;
+    right: 0;
+    padding-bottom: 20px;
+    
+    &:before {
+      content: '';
+      //Bottom Line
+      height: 3px; width: 30px;
+      box-shadow:
+         //Top Line
+        0px 20px 0px 0px $primary-color,
+        //Middle Line
+        0px 10px 0px 0px  $primary-color;
+      display: inline-block;
+      margin: 0 10px;
+      background-color: $primary-color;
+    }
+    
+  }
+  
+  #toggle:checked {
+    
+    & ~ label {
+      visibility: hidden;
+    }
+    & ~ ul {
+      visibility: visible;
+      transition: visibility 0s,
+                opacity 0.5s,
+                height 0.3s,
+                width 0.3s;
+      opacity: 1;
+      width: 165px;
+      height: 50vh;
+      padding: 2em 2em 1em 2em;
+      font-size: 24px;
+    }
+  }
+  
+  
+  ul {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    
+    background-color: #fff;
+    padding: 2em 2em 1em 1em;
+    list-style: none;
+    margin: 0;
+    
+    position: relative;
+    
+    transition: visibility 0s,
+                opacity 0.5s 0.3s,
+                height 0.3s,
+                width 0.3s;
+    
+    
+    
+    i {
+      position: absolute;
+      
+      top: 10px;
+      right: 10px;
+    }
+    
+    li {
+      margin-bottom: 1em;
+      text-align: center;
+      
+      &.active, &:hover {
+        color: $secondary-color;
+        font-weight: bold;
+      }
+      
+      &:hover {
+        cursor: pointer;
+        
+      }
+    }
+  }
+}
+
