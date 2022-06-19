@@ -1,0 +1,259 @@
+<button class="button dark">
+    <div class="hand">
+        <div class="thumb"></div>
+    </div>
+    <span>Like<span>d</span></span>
+</button>
+
+<button class="button">
+    <div class="hand">
+        <div class="thumb"></div>
+    </div>
+    <span>Like<span>d</span></span>
+</button>
+
+<!-- dribbble - twitter -->
+<a class="dribbble" href="https://dribbble.com/ai" target="_blank"><img src="https://cdn.dribbble.com/assets/dribbble-ball-mark-2bd45f09c2fb58dbbfb44766d5d1d07c5a12972d602ef8b32204d28fa3dda554.svg" alt=""></a>
+<a class="twitter" target="_top" href="https://twitter.com/aaroniker_me"><svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72"><path d="M67.812 16.141a26.246 26.246 0 0 1-7.519 2.06 13.134 13.134 0 0 0 5.756-7.244 26.127 26.127 0 0 1-8.313 3.176A13.075 13.075 0 0 0 48.182 10c-7.229 0-13.092 5.861-13.092 13.093 0 1.026.118 2.021.338 2.981-10.885-.548-20.528-5.757-26.987-13.679a13.048 13.048 0 0 0-1.771 6.581c0 4.542 2.312 8.551 5.824 10.898a13.048 13.048 0 0 1-5.93-1.638c-.002.055-.002.11-.002.162 0 6.345 4.513 11.638 10.504 12.84a13.177 13.177 0 0 1-3.449.457c-.846 0-1.667-.078-2.465-.231 1.667 5.2 6.499 8.986 12.23 9.09a26.276 26.276 0 0 1-16.26 5.606A26.21 26.21 0 0 1 4 55.976a37.036 37.036 0 0 0 20.067 5.882c24.083 0 37.251-19.949 37.251-37.249 0-.566-.014-1.134-.039-1.694a26.597 26.597 0 0 0 6.533-6.774z"></path></svg></a>
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.button {
+    --color: #1E2235;
+    --color-hover: #1E2235;
+    --color-active: #fff;
+    --icon: #BBC1E1;
+    --icon-hover: #8A91B4;
+    --icon-active: #fff;
+    --background: #fff;
+    --background-hover: #fff;
+    --background-active: #362A89;
+    --border: #E1E6F9;
+    --border-active: #362A89;
+    --shadow: #{rgba(#001177, .025)};
+    display: block;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    border: 0;
+    background: none;
+    padding: 8px 20px 8px 24px;
+    border-radius: 9px;
+    line-height: 27px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color);
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: color .2s linear;
+    &.dark {
+        --color: #F6F8FF;
+        --color-hover: #F6F8FF;
+        --color-active: #fff;
+        --icon: #8A91B4;
+        --icon-hover: #BBC1E1;
+        --icon-active: #fff;
+        --background: #1E2235;
+        --background-hover: #171827;
+        --background-active: #275EFE;
+        --border: transparent;
+        --border-active: transparent;
+        --shadow: #{rgba(#001177, .16)};
+    }
+    &:hover {
+        --icon: var(--icon-hover);
+        --color: var(--color-hover);
+        --background: var(--background-hover);
+        --border-width: 2px;
+    }
+    &:active {
+        --scale: .95;
+    }
+    &:not(.liked) {
+        &:hover {
+            --hand-rotate: 8;
+            --hand-thumb-1: -12deg;
+            --hand-thumb-2: 36deg;
+        }
+    }
+    &.liked {
+        --span-x: 2px;
+        --span-d-o: 1;
+        --span-d-x: 0;
+        --icon: var(--icon-active);
+        --color: var(--color-active);
+        --border: var(--border-active);
+        --background: var(--background-active);
+    }
+    &:before {
+        content: '';
+        min-width: 103px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        transition: background .2s linear, transform .2s, box-shadow .2s linear;
+        transform: scale(var(--scale, 1)) translateZ(0);
+        background: var(--background);
+        box-shadow: inset 0 0 0 var(--border-width, 1px) var(--border), 0 4px 8px var(--shadow), 0 8px 20px var(--shadow);
+    }
+    .hand {
+        width: 11px;
+        height: 11px;
+        border-radius: 2px 0 0 0;
+        background: var(--icon);
+        position: relative;
+        margin: 10px 8px 0 0;
+        transform-origin: -5px -1px;
+        transition: transform .25s, background .2s linear;
+        transform: rotate(calc(var(--hand-rotate, 0) * 1deg)) translateZ(0);
+        &:before,
+        &:after {
+            content: '';
+            background: var(--icon);
+            position: absolute;
+            transition: background .2s linear, box-shadow .2s linear;
+        }
+        &:before {
+            left: -5px;
+            bottom: 0;
+            height: 12px;
+            width: 4px;
+            border-radius: 1px 1px 0 1px;
+        }
+        &:after {
+            right: -3px;
+            top: 0;
+            width: 4px;
+            height: 4px;
+            border-radius: 0 2px 2px 0;
+            background: var(--icon);
+            box-shadow: -.5px 4px 0 var(--icon), -1px 8px 0 var(--icon), -1.5px 12px 0 var(--icon);
+            transform: scaleY(.6825);
+            transform-origin: 0 0;
+        }
+        .thumb {
+            background: var(--icon);
+            width: 10px;
+            height: 4px;
+            border-radius: 2px;
+            transform-origin: 2px 2px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: transform .25s, background .2s linear;
+            transform: scale(.85) translateY(-.5px) rotate(var(--hand-thumb-1, -45deg)) translateZ(0);
+            &:before {
+                content: '';
+                height: 4px;
+                width: 7px;
+                border-radius: 2px;
+                transform-origin: 2px 2px;
+                background: var(--icon);
+                position: absolute;
+                left: 7px;
+                top: 0;
+                transition: transform .25s, background .2s linear;
+                transform: rotate(var(--hand-thumb-2, -45deg)) translateZ(0);
+            }
+        }
+    }
+    .hand,
+    span {
+        display: inline-block;
+        vertical-align: top;
+        span {
+            opacity: var(--span-d-o, 0);
+            transition: transform .25s, opacity .2s linear;
+            transform: translateX(var(--span-d-x, 4px)) translateZ(0);
+        }
+    }
+    & > span {
+        transition: transform .25s;
+        transform: translateX(var(--span-x, 4px)) translateZ(0);
+    }
+}
+
+html {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+    box-sizing: inherit;
+    &:before,
+    &:after {
+        box-sizing: inherit;
+    }
+}
+
+// Center & dribbble
+body {
+    min-height: 100vh;
+    display: flex;
+    font-family: 'Inter', Arial;
+    justify-content: center;
+    align-items: center;
+    background: #F6F8FF;
+    .button {
+        margin: 0 12px;
+    }
+    .dribbble {
+        position: fixed;
+        display: block;
+        right: 20px;
+        bottom: 20px;
+        img {
+            display: block;
+            height: 28px;
+        }
+    }
+    .twitter {
+        position: fixed;
+        display: block;
+        right: 64px;
+        bottom: 14px;
+        svg {
+            width: 32px;
+            height: 32px;
+            fill: #1da1f2;
+        }
+    }
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+document.querySelectorAll('.button').forEach(button => {
+
+    button.addEventListener('click', e => {
+        button.classList.toggle('liked');
+        if(button.classList.contains('liked')) {
+            gsap.fromTo(button, {
+                '--hand-rotate': 8
+            }, {
+                ease: 'none',
+                keyframes: [{
+                    '--hand-rotate': -45,
+                    duration: .16,
+                    ease: 'none'
+                }, {
+                    '--hand-rotate': 15,
+                    duration: .12,
+                    ease: 'none'
+                }, {
+                    '--hand-rotate': 0,
+                    duration: .2,
+                    ease: 'none',
+                    clearProps: true
+                }]
+            });
+        }
+    })
+
+});
+
+https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js
