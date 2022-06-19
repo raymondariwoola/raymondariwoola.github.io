@@ -1,16 +1,1 @@
 
-        $("#like-span").on("click", function (e) {
-            //e.stopPropagation();
-            console.log(e.target.tagName)
-        })
-
-        $(".btn").on("click", function (e) {
-            const collapseElem = $(this).attr("aria-controls");
-            var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
-            var collapseList = collapseElementList.map(function (collapseEl, q) {
-                if (collapseEl["id"] == collapseElem) {
-                    return new bootstrap.Collapse(collapseEl)
-                }
-                $('.collapse').collapse('hide');
-            })
-        })
