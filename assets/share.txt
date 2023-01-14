@@ -1,62 +1,20 @@
-'  Excel VBA script that will import the contents of a folder into a worksheet
+'Here is an example VBA script that can be used to import the contents of multiple Excel files from a folder into a single Excel workbook:
 
-Sub ImportFolder()
-    Dim fso As Object
-    Dim fld As Object
-    Dim fil As Object
-    Dim i As Integer
-    Dim ws As Worksheet
-
-    'create a new worksheet
-    Set ws = ThisWorkbook.Sheets.Add
-
-    'set the initial row number
-    i = 1
-
-    'create an instance of the FileSystemObject
-    Set fso = CreateObject("Scripting.FileSystemObject")
-
-    'set the folder you want to import
-    Set fld = fso.GetFolder("C:\your\folder\path")
-
-    'loop through each file in the folder
-    For Each fil In fld.Files
-        'write the file name to column A
-        ws.Cells(i, 1).Value = fil.Name
-
-        'write the file path to column B
-        ws.Cells(i, 2).Value = fil.Path
-
-        'write the file size to column C
-        ws.Cells(i, 3).Value = fil.Size
-
-        'write the file type to column D
-        ws.Cells(i, 4).Value = fil.Type
-
-        'increment the row number
-        i = i + 1
-    Next fil
-End Sub
-
-
-
-
-
-
-
-Sub ImportFolder()
+Sub ImportExcelFiles()
     Dim fso As Object
     Dim folder As Object
     Dim file As Object
-    Dim i As Integer
+    Dim wb As Workbook
     Dim ws As Worksheet
+    Dim i As Integer
+    Dim lastRow As Long
     
     'Set the folder path
     folderPath = "C:\example\"
     
     'Create a new worksheet
     Set ws = ThisWorkbook.Sheets.Add
-    ws.Name = "Imported Files"
+    ws.Name = "Imported Data"
     
     'Create a File System Object
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -64,18 +22,31 @@ Sub ImportFolder()
     'Get the folder object
     Set folder = fso.GetFolder(folderPath)
     
-    'Add the headers to the worksheet
-    ws.Cells(1, 1) = "File Name"
-    ws.Cells(1, 2) = "File Path"
-    ws.Cells(1, 3) = "File Size (bytes)"
-    
     'Loop through the files in the folder
-    i = 2
     For Each file In folder.Files
-        'Add the file name, path, and size to the worksheet
-        ws.Cells(i, 1) = file.Name
-        ws.Cells(i, 2) = file.Path
-        ws.Cells(i, 3) = file.Size
-        i = i + 1
+        'Check if the file is an Excel file
+        If Right(file.Name, 4) = ".xls" Or Right(file.Name, 5) = ".xlsx" Then
+            'Open the Excel file
+            Set wb = Workbooks.Open(file.Path)
+            
+            'Get the last row of data in the first worksheet
+            lastRow = wb.Sheets(1).Cells(Rows.Count, 1).End(xlUp).Row
+            
+            'Copy the data from the first worksheet of the Excel file
+            wb.Sheets(1).Range("A1:Z" & lastRow).Copy
+            
+            'Paste the data into the "Imported Data" worksheet
+            ws.Range("A" & Rows.Count).End(xlUp).Offset(1, 0).PasteSpecial xlPasteValues
+            
+            'Close the Excel file
+            wb.Close False
+        End If
     Next file
 End Sub
+
+
+' You can run this script by opening the Visual Basic Editor (VBE) in Excel, creating a new module, and pasting the code into the module. You can then run the code by clicking the "Run" button or by pressing F5.
+
+You should modify the folderPath variable to match the folder you want to import files from.
+
+It's also important to note that this script will copy only the first sheet of the files, if you need to copy all the sheets you need to make small adjustments on the script.
