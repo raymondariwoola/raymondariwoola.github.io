@@ -1,1 +1,40 @@
+'  Excel VBA script that will import the contents of a folder into a worksheet
+
+Sub ImportFolder()
+    Dim fso As Object
+    Dim fld As Object
+    Dim fil As Object
+    Dim i As Integer
+    Dim ws As Worksheet
+
+    'create a new worksheet
+    Set ws = ThisWorkbook.Sheets.Add
+
+    'set the initial row number
+    i = 1
+
+    'create an instance of the FileSystemObject
+    Set fso = CreateObject("Scripting.FileSystemObject")
+
+    'set the folder you want to import
+    Set fld = fso.GetFolder("C:\your\folder\path")
+
+    'loop through each file in the folder
+    For Each fil In fld.Files
+        'write the file name to column A
+        ws.Cells(i, 1).Value = fil.Name
+
+        'write the file path to column B
+        ws.Cells(i, 2).Value = fil.Path
+
+        'write the file size to column C
+        ws.Cells(i, 3).Value = fil.Size
+
+        'write the file type to column D
+        ws.Cells(i, 4).Value = fil.Type
+
+        'increment the row number
+        i = i + 1
+    Next fil
+End Sub
 
