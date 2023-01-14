@@ -1,52 +1,34 @@
-'Here is an example VBA script that can be used to import the contents of multiple Excel files from a folder into a single Excel workbook:
+Here is an example VBA script that can be used to refresh a Power Query in Excel using VBA:
 
-Sub ImportExcelFiles()
-    Dim fso As Object
-    Dim folder As Object
-    Dim file As Object
-    Dim wb As Workbook
-    Dim ws As Worksheet
-    Dim i As Integer
-    Dim lastRow As Long
-    
-    'Set the folder path
-    folderPath = "C:\example\"
-    
-    'Create a new worksheet
-    Set ws = ThisWorkbook.Sheets.Add
-    ws.Name = "Imported Data"
-    
-    'Create a File System Object
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    
-    'Get the folder object
-    Set folder = fso.GetFolder(folderPath)
-    
-    'Loop through the files in the folder
-    For Each file In folder.Files
-        'Check if the file is an Excel file
-        If Right(file.Name, 4) = ".xls" Or Right(file.Name, 5) = ".xlsx" Then
-            'Open the Excel file
-            Set wb = Workbooks.Open(file.Path)
-            
-            'Get the last row of data in the first worksheet
-            lastRow = wb.Sheets(1).Cells(Rows.Count, 1).End(xlUp).Row
-            
-            'Copy the data from the first worksheet of the Excel file
-            wb.Sheets(1).Range("A1:Z" & lastRow).Copy
-            
-            'Paste the data into the "Imported Data" worksheet
-            ws.Range("A" & Rows.Count).End(xlUp).Offset(1, 0).PasteSpecial xlPasteValues
-            
-            'Close the Excel file
-            wb.Close False
-        End If
-    Next file
+
+Sub RefreshPowerQuery()
+    'Refresh the Power Query
+    ActiveWorkbook.Queries("Query1").Refresh
 End Sub
 
 
-' You can run this script by opening the Visual Basic Editor (VBE) in Excel, creating a new module, and pasting the code into the module. You can then run the code by clicking the "Run" button or by pressing F5.
+You can run this script by opening the Visual Basic Editor (VBE) in Excel, creating a new module, and pasting the code into the module. You can then run the code by clicking the "Run" button or by pressing F5.
 
-You should modify the folderPath variable to match the folder you want to import files from.
+You can replace the "Query1" with the name of your query, you can also refresh all queries in a workbook by using this script
 
-It's also important to note that this script will copy only the first sheet of the files, if you need to copy all the sheets you need to make small adjustments on the script.
+
+
+Sub RefreshAllPowerQueries()
+    Dim qry As WorkbookQuery
+    For Each qry In ActiveWorkbook.Queries
+        qry.Refresh
+    Next qry
+End Sub
+
+
+You can also schedule the refresh by using the Workbook.RefreshAll method and set the BackgroundQuery property to False or True, whether or not to refresh the query in the background.
+
+
+
+
+Sub RefreshAllPowerQueries()
+    ActiveWorkbook.RefreshAll BackgroundQuery:=False
+End Sub
+
+
+It's also important to note that to run the script, you need to enable the "Microsoft Power Query for Excel" add-in, and you need to have the latest version of Excel.
